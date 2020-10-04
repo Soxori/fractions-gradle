@@ -22,30 +22,49 @@ public class Fraction implements IFraction {
 
     @Override
     public IFraction plus(IFraction other) {
-        throw new UnsupportedOperationException();
+        int SpolecnyJmenovatel = getDenominator() * other.getDenominator();
+        int Citatel = (getNumerator() * other.getDenominator()) + (other.getNumerator() * getDenominator());
+        return new Fraction(Citatel, SpolecnyJmenovatel);
     }
 
     @Override
     public IFraction minus(IFraction other) {
-        throw new UnsupportedOperationException();
+        int SpolecnyJmenovatel = getDenominator() * other.getDenominator();
+        int Citatel = (getNumerator() * other.getDenominator()) - (other.getNumerator() * getDenominator());
+        return new Fraction(Citatel, SpolecnyJmenovatel);
     }
 
     @Override
     public IFraction times(IFraction other) {
-        throw new UnsupportedOperationException();
+        int SpolecnyJmenovatel = getDenominator() * other.getDenominator();
+        int Citatel = getNumerator() * other.getNumerator();
+        return new Fraction(Citatel, SpolecnyJmenovatel);
     }
 
     @Override
     public IFraction dividedBy(IFraction other) {
-        throw new UnsupportedOperationException();
+        int SpolecnyJmenovatel = getDenominator() * other.getNumerator();
+        int Citatel = other.getDenominator() * getNumerator();
+        return  new Fraction(Citatel, SpolecnyJmenovatel);
     }
 
     public static Fraction createNormalised(Integer numerator, Integer denominator) {
-        throw new UnsupportedOperationException();
+        var NejvetsiDelitel = gcdByEuclidsAlgorithm(numerator, denominator);
+        int i = numerator / NejvetsiDelitel;
+        int j = denominator / NejvetsiDelitel;
+        return new Fraction(i,j);
+    }
+
+    private static int gcdByEuclidsAlgorithm(int n1, int n2) {
+        if (n2 == 0) {
+            return n1;
+        }
+        return gcdByEuclidsAlgorithm(n2, n1 % n2);
     }
 
     @Override
     public String toString() {
         return "Fraction " + numerator + "|" + denominator;
     }
+
 }
